@@ -1,2 +1,0 @@
-/home/choi/project/tyranno/build/CMakeFiles/rebuild_cache.dir
-/home/choi/project/tyranno/build/CMakeFiles/edit_cache.dir
