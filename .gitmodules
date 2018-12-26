@@ -1,0 +1,6 @@
+[submodule "thirdparty/googletest"]
+	path = thirdparty/googletest
+	url = https://github.com/google/googletest
+[submodule "thirdparty/FFmpeg"]
+	path = thirdparty/FFmpeg
+	url = https://github.com/FFmpeg/FFmpeg
