@@ -8,3 +8,4 @@ set_property (GLOBAL PROPERTY GLOBAL_CPP_VERSION 14)
 
 #add_subdirectory(util)
 add_subdirectory(test)
+
