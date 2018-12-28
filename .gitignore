@@ -1,1 +1,6 @@
 tags
+
+Makefile
+*.cmake
+CMakeCache.txt
+CMakeFiles/
