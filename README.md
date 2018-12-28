@@ -1,2 +1,1 @@
 # tyranno
-Easy to develop
