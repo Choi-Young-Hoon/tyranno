@@ -1,2 +1,0 @@
-/home/choi/project/tyranno/lib/libtyrannonetwork.a
-/home/choi/project/tyranno/lib/libtyrannoutil.a
