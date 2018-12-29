@@ -16,19 +16,15 @@ public:
     };
     typedef enum _ERROR_DEFINE ERROR_DEFINE;
 
-
 public:
     explicit TRTcpAcceptor();
     virtual ~TRTcpAcceptor();
 
-
 public:
     TRTcpSocket AcceptClient(TRTcpEndPoint& end_point, TRError* error);
 
-
 private:
     void SocketBinding(TRTcpEndPoint& end_point ,TRError* error);
-
 
 private:
     int port_;

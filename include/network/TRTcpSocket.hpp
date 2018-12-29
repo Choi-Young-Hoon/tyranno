@@ -22,12 +22,10 @@ public:
     };
     typedef enum _ERROR_DEFINE ERROR_DEFINE;
 
-
 public:
     explicit TRTcpSocket();
     explicit TRTcpSocket(int socket);
     virtual ~TRTcpSocket();
-   
 
 public:
     void CreateSocket(TRError* error);
@@ -45,10 +43,8 @@ public:
     int Recv(unsigned char* data, int data_buffer_size, TRError* error);
     int Recv(TRByteBuffer* buffer, TRError* error);
 
-
 public:
     operator int();
-
 
 private:
     int socket_descriptor_;

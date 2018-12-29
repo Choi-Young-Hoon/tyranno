@@ -13,11 +13,9 @@ public:
     };
     typedef enum _ERROR_DEFINE ERROR_DEFINE;
 
-
 public:
     explicit TRTcpConnector();
     virtual ~TRTcpConnector();
-
 
 public:
     TRTcpSocket ConnectServer(TRTcpEndPoint& end_point, TRError* error);

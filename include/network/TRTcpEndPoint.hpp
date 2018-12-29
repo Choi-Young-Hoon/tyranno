@@ -11,12 +11,10 @@ public:
     };
     typedef enum _IP_PROTOCOL_VERSION IP_PROTOCOL_VERSION;
 
-
 public:
     explicit TRTcpEndPoint();
     explicit TRTcpEndPoint(int port, IP_PROTOCOL_VERSION ip_protocol_version = IP_V4);
     virtual ~TRTcpEndPoint();
-
 
 public:
     void SetIpAddress(const char* ip_address);
@@ -27,7 +25,6 @@ public:
     std::string GetIpAddress();
     int GetPort();
     IP_PROTOCOL_VERSION GetProtocolVersion();
-    
 
 private:
     std::string ip_address_;

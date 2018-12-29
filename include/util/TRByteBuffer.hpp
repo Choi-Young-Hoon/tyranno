@@ -11,7 +11,6 @@ public:
 
     virtual ~TRByteBuffer();
 
-
 public:
     void Clear();
     bool IsEmpty();
@@ -27,12 +26,10 @@ public:
 
     TRByteBuffer Sub(int start_index, int end_index);
 
-
 public:
     unsigned char operator[](int index); 
     TRByteBuffer& operator+=(TRByteBuffer& buffer);
     TRByteBuffer& operator+ (TRByteBuffer& buffer);
-
 
 private:
     std::vector<unsigned char> buffer_;
