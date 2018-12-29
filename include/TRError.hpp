@@ -1,6 +1,8 @@
 #ifndef __TRANNO_ERROR_HEADER__
 #define __TRANNO_ERROR_HEADER__
 
+#include "TR_DEFINE.hpp"
+
 #include <string>
 
 class TRError {

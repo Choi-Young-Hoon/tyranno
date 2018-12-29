@@ -13,6 +13,8 @@ public:
 public:
     virtual void marshal(TRByteBuffer* byte_buffer) = 0;
     virtual void unmarshal(TRByteBuffer& byte_buffer, TRError* error) = 0;
+
+    virtual void Clear();
 };
 
 #endif

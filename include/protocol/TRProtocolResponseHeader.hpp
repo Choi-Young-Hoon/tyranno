@@ -5,9 +5,9 @@
 
 extern "C" {
     struct _TR_PROTOCOL_RESPONSE_DATA {
-        uint request_type;
-        uint result_code;
-        uint error_message_length;
+        TR_REQUEST_TYPE request_type;
+        TR_RESULT_CODE result_code;
+        TR_ERROR_LENGTH error_message_length;
     };
     typedef struct _TR_PROTOCOL_RESPONSE_DATA TR_PROTOCOL_RESPONSE_DATA;
 
@@ -27,25 +27,25 @@ public:
     virtual void marshal(TRByteBuffer* byte_buffer);
     virtual void unmarshal(TRByteBuffer& byte_buffer, TRError* error);
 
+    virtual void Clear();
+    
 public:
-    void Clear();
-
     // set
-    void SetRequestType(uint request_type);
-    void SetResultCode(uint result_code);
+    void SetRequestType(TR_REQUEST_TYPE request_type);
+    void SetResultCode(TR_RESULT_CODE result_code);
     void SetErrorMessage(const char* error_message);
     void SetErrorMessage(std::string& error_message);
 
     // get 
-    uint GetRequestType();
-    uint GetResultCode();
-    uint GetErrorMessageLength();
-    std::string GetErrorMessage();
+    TR_REQUEST_TYPE GetRequestType();
+    TR_RESULT_CODE  GetResultCode();
+    TR_ERROR_LENGTH GetErrorMessageLength();
+    std::string     GetErrorMessage();
 
 private:
-    int GetRequestType(TRByteBuffer& byte_buffer);
-    int GetResultCode(TRByteBuffer& byte_buffer);
-    int GetErrorMessageLength(TRByteBuffer& byte_buffer);
+    TR_REQUEST_TYPE GetRequestType(TRByteBuffer& byte_buffer);
+    TR_RESULT_CODE  GetResultCode(TRByteBuffer& byte_buffer);
+    TR_ERROR_LENGTH GetErrorMessageLength(TRByteBuffer& byte_buffer);
 
 private:
     TR_PROTOCOL_RESPONSE_HEADER header_data_;

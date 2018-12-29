@@ -1,7 +1,14 @@
 #include "TRProtocolBodyInterface.hpp"
 
-TRProtocolBodyInterface::TRProtocolBodyInterface()
-{}
+TRProtocolBodyInterface::TRProtocolBodyInterface() {
+    Clear();
+}
 
-TRProtocolBodyInterface::~TRProtocolBodyInterface()
-{}
+TRProtocolBodyInterface::~TRProtocolBodyInterface() {
+    Clear();
+}
+
+
+void TRProtocolBodyInterface::Clear() {
+    
+}

@@ -6,7 +6,10 @@
 #include "util/TRByteBuffer.hpp"
 
 extern "C" {
+    struct _TR_PROTOCOL_MUXING_REQUEST {
 
+    };
+    typedef struct _TR_PROTOCOL_MUXING_REQUEST TR_PROTOCOL_MUXING_REQUEST;
 };
 
 class TRProtocolMuxingRequest : public TRProtocolBodyInterface {
@@ -18,8 +21,10 @@ public:
     virtual void marshal(TRByteBuffer* byte_buffer);
     virtual void unmarshal(TRByteBuffer& byte_buffer, TRError* error);
 
-private:
+    virtual void Clear();
 
+private:
+    TR_PROTOCOL_MUXING_REQUEST body_data_;
 };
 
 #endif

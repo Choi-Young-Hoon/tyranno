@@ -7,13 +7,11 @@
 TEST(TRProtocolRequestHeader_TEST, marshal_unmarshal_TEST) {
     uint request_type = 600;
     uint8_t system_type = 1;
-    uint16_t version = 3;
     uint session = 100;
 
     TRProtocolRequestHeader request_header_marshal;
     request_header_marshal.SetRequestType(request_type);
     request_header_marshal.SetSystemType(system_type);
-    request_header_marshal.SetVersion(version);
     request_header_marshal.SetSession(session);
 
     TRByteBuffer byte_buffer;
@@ -26,7 +24,6 @@ TEST(TRProtocolRequestHeader_TEST, marshal_unmarshal_TEST) {
 
     ASSERT_EQ(request_header_unmarshal.GetRequestType(), request_type);
     ASSERT_EQ(request_header_unmarshal.GetSystemType(), system_type);
-    ASSERT_EQ(request_header_unmarshal.GetVersion(), version);
     ASSERT_EQ(request_header_unmarshal.GetSession(), session);     
 }
 
@@ -62,7 +59,6 @@ TEST(TRProtocolRequestHeader_TEST, marshal_unmarshal_FAILED_TEST) {
     TRProtocolRequestHeader request_header_marshal;
     request_header_marshal.SetRequestType(request_type);
     request_header_marshal.SetSystemType(system_type);
-    request_header_marshal.SetVersion(version);
     request_header_marshal.SetSession(session);
 
     TRByteBuffer byte_buffer;
@@ -75,7 +71,6 @@ TEST(TRProtocolRequestHeader_TEST, marshal_unmarshal_FAILED_TEST) {
 
     ASSERT_TRUE(request_header_unmarshal.GetRequestType() != request_type - 1);
     ASSERT_TRUE(request_header_unmarshal.GetSystemType() != system_type - 1);
-    ASSERT_TRUE(request_header_unmarshal.GetVersion() != version - 1);
     ASSERT_TRUE(request_header_unmarshal.GetSession() != session - 1);     
 }
 

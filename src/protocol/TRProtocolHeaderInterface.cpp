@@ -1,8 +1,15 @@
 #include "TRProtocolHeaderInterface.hpp"
 
 
-TRProtocolHeaderInterface::TRProtocolHeaderInterface()
-{}
+TRProtocolHeaderInterface::TRProtocolHeaderInterface() {
+    Clear();
+}
 
-TRProtocolHeaderInterface::~TRProtocolHeaderInterface()
-{}
+TRProtocolHeaderInterface::~TRProtocolHeaderInterface() {
+    Clear();
+}
+
+
+void TRProtocolHeaderInterface::Clear() {
+    
+}
