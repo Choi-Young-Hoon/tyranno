@@ -1,3 +1,5 @@
+#ifdef __linux__
+
 #include "TRTcpConnector.hpp"
 
 #include <cstdio>
@@ -39,3 +41,5 @@ TRTcpSocket TRTcpConnector::ConnectServer(TRTcpEndPoint& end_point, TRError* err
 
     return return_socket;
 }
+
+#endif

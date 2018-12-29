@@ -16,10 +16,14 @@ set (SOURCES TRProtocol.cpp
              TRProtocolBodyInterface.cpp
              TRProtocolRequestHeader.cpp
              TRProtocolResponseHeader.cpp
-             TRProtocolRegist.cpp
-             TRProtocolExit.cpp 
-             TRProtocolTranscoding.cpp 
-             TRProtocolMuxing.cpp)
+             TRProtocolRegistRequest.cpp
+             TRProtocolRegistResponse.cpp 
+             TRProtocolExitRequest.cpp 
+             TRProtocolExitResponse.cpp
+             TRProtocolTranscodingRequest.cpp
+             TRProtocolTranscodingResponse.cpp 
+             TRProtocolMuxingRequest.cpp 
+             TRProtocolMuxingResponse.cpp)
 
 # compile option
 add_compile_options (-W -Wall)

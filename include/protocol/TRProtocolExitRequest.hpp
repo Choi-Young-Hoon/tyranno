@@ -1,5 +1,5 @@
-#ifndef __TYRANNO_PROTOCOL_MUXING_HEADER__
-#define __TYRANNO_PROTOCOL_MUXING_HEADER__
+#ifndef __TYRANNO_PROTOCOL_EXIT_REQUEST_HEADER__
+#define __TYRANNO_PROTOCOL_EXIT_REQUEST_HEADER__
 
 #include "TRError.hpp"
 #include "TRProtocolBodyInterface.hpp"
@@ -9,10 +9,10 @@ extern "C" {
 
 };
 
-class TRProtocolMuxing : public TRProtocolBodyInterface {
+class TRProtocolExitRequest : public TRProtocolBodyInterface {
 public:
-    explicit TRProtocolMuxing();
-    virtual ~TRProtocolMuxing();
+    explicit TRProtocolExitRequest();
+    virtual ~TRProtocolExitRequest();
 
 public:
     virtual void marshal(TRByteBuffer* byte_buffer);
@@ -21,5 +21,4 @@ public:
 private:
 
 };
-
 #endif

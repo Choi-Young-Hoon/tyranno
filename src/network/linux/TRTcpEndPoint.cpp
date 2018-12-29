@@ -1,3 +1,5 @@
+#ifdef __linux__
+
 #include "TRTcpEndPoint.hpp"
 
 
@@ -41,3 +43,5 @@ int TRTcpEndPoint::GetPort() {
 TRTcpEndPoint::IP_PROTOCOL_VERSION TRTcpEndPoint::GetProtocolVersion() {
     return this->ip_protocol_version_;
 }
+
+#endif

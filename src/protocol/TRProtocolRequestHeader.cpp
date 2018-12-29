@@ -48,8 +48,6 @@ void TRProtocolRequestHeader::Clear() {
 }
 
 void TRProtocolRequestHeader::marshal(TRByteBuffer* byte_buffer) {
-    byte_buffer->Clear();
-
     byte_buffer->SetData((unsigned char*)&this->header_data_, sizeof(this->header_data_));
 }
 

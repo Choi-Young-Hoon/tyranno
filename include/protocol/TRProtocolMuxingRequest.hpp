@@ -1,5 +1,5 @@
-#ifndef __TYRANNO_PROTOCOL_TRANSCODING_HEADER__
-#define __TYRANNO_PROTOCOL_TRANSCODING_HEADER__
+#ifndef __TYRANNO_PROTOCOL_MUXING_REQUEST_HEADER__
+#define __TYRANNO_PROTOCOL_MUXING_REQUEST_HEADER__
 
 #include "TRError.hpp"
 #include "TRProtocolBodyInterface.hpp"
@@ -9,10 +9,10 @@ extern "C" {
 
 };
 
-class TRProtocolTranscoding : public TRProtocolBodyInterface {
+class TRProtocolMuxingRequest : public TRProtocolBodyInterface {
 public:
-    explicit TRProtocolTranscoding();
-    virtual ~TRProtocolTranscoding();
+    explicit TRProtocolMuxingRequest();
+    virtual ~TRProtocolMuxingRequest();
 
 public:
     virtual void marshal(TRByteBuffer* byte_buffer);

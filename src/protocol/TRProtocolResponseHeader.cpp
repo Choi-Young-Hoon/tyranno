@@ -61,7 +61,6 @@ void TRProtocolResponseHeader::Clear() {
 
 
 void TRProtocolResponseHeader::marshal(TRByteBuffer* byte_buffer) {
-    byte_buffer->Clear();
 
     byte_buffer->Append((unsigned char*)&this->header_data_.data, sizeof(this->header_data_.data));
    

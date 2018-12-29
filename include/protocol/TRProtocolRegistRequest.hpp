@@ -1,5 +1,5 @@
-#ifndef __TYRANNO_PROTOCOL_EXIT_HEADER__
-#define __TYRANNO_PROTOCOL_EXIT_HEADER__
+#ifndef __TYRANNO_PROTOCOL_REGIST_REQUEST_HEADER__
+#define __TYRANNO_PROTOCOL_REGIST_REQUEST_HEADER__
 
 #include "TRError.hpp"
 #include "TRProtocolBodyInterface.hpp"
@@ -9,10 +9,10 @@ extern "C" {
 
 };
 
-class TRProtocolExit : public TRProtocolBodyInterface {
+class TRProtocolRegistRequest : public TRProtocolBodyInterface {
 public:
-    explicit TRProtocolExit();
-    virtual ~TRProtocolExit();
+    explicit TRProtocolRegistRequest();
+    virtual ~TRProtocolRegistRequest();
 
 public:
     virtual void marshal(TRByteBuffer* byte_buffer);
@@ -21,4 +21,5 @@ public:
 private:
 
 };
+
 #endif
