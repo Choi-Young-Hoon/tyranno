@@ -57,7 +57,7 @@ TEST(TRByteBuffer_TEST, Append) {
     ASSERT_EQ(byteBuffer.GetLength(), g_temp_data_length * 2);
 }
 
-TEST(TYByteBuffer_TEST, Const_char) {
+TEST(TRByteBuffer_TEST, Const_char) {
     const char* temp_data = "hello world";
     int   temp_data_length = strlen(temp_data);
 
@@ -66,4 +66,16 @@ TEST(TYByteBuffer_TEST, Const_char) {
 
     char* return_data = (char*)byteBuffer.GetData();
     ASSERT_TRUE(strcmp(return_data, temp_data) == 0);
+}
+
+TEST(TRByteBuffer_TEST, Sub) {
+    TRByteBuffer byteBuffer(g_temp_data, g_temp_data_length);
+
+    int start_index = 1;
+    int end_index   = 3;
+
+    TRByteBuffer subBuffer = byteBuffer.Sub(start_index, end_index);
+    for (int i = start_index; i < end_index; i++) {
+        ASSERT_EQ(g_temp_data[i], subBuffer[i - start_index]);
+    }
 }
