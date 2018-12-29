@@ -3,11 +3,12 @@
 #include "TRTcpSocket.hpp"
 
 #include <cstdio>
-#include <cerrno>
 #include <cstring>
+#include <cerrno>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <arpa/inet.h>
 
 
 TRTcpSocket::TRTcpSocket() 
@@ -40,6 +41,10 @@ void TRTcpSocket::CloseSocket() {
     socket_descriptor_ = 0;
 }
 
+void TRTcpSocket::SetEndPoint(TRTcpEndPoint& end_point) {
+    this->end_point_ = end_point;
+}
+
 void TRTcpSocket::SetRawSocketDescriptor(int socket_descriptor) {
     this->socket_descriptor_ = socket_descriptor;
 }
@@ -64,12 +69,6 @@ int TRTcpSocket::Send(const char* data, TRError* error) {
     return Send(buffer, error);
 }
 
-int TRTcpSocket::Send(std::string& data, TRError* error) {
-    TRByteBuffer buffer(data.c_str());
-
-    return Send(buffer, error);
-}
-
 int TRTcpSocket::Send(TRByteBuffer& buffer, TRError* error) {
     int send_size = send(this->socket_descriptor_, buffer.GetData(), buffer.GetLength(), 0);
     if (send_size == -1) {
@@ -79,23 +78,6 @@ int TRTcpSocket::Send(TRByteBuffer& buffer, TRError* error) {
 
     error->SetErrorCode(ERROR_DEFINE::SUCCESS);
     return send_size;
-}
-
-int TRTcpSocket::SendAll(TRByteBuffer& buffer, TRError* error) {
-    int total_send_size = 0;
-    
-    while (total_send_size != buffer.GetLength()) {
-        TRByteBuffer send_buffer = buffer.Sub(total_send_size - 1, buffer.GetLength());
-        int send_size = Send(send_buffer, error);
-        if (error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
-            return -1;
-        }
-
-        total_send_size += send_size;
-    }
-
-    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
-    return total_send_size;
 }
 
 int TRTcpSocket::Recv(unsigned char* data, int data_buffer_size, TRError* error) {
@@ -120,25 +102,6 @@ int TRTcpSocket::Recv(TRByteBuffer* buffer, TRError* error) {
     buffer->SetData(data, recv_size);
     error->SetErrorCode(ERROR_DEFINE::SUCCESS);
     return recv_size;
-}
-
-int TRTcpSocket::RecvAll(TRByteBuffer* buffer, TRError* error) {
-    int total_recv_size = 0;
-    
-    int recv_size = 0;
-    do {    
-        TRByteBuffer recv_buffer;
-        recv_size = Recv(&recv_buffer, error); 
-        if (error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
-            return -1;
-        }
-
-        buffer->Append(recv_buffer);
-        total_recv_size += recv_size;
-    } while(recv_size >= DEFAULT_RECV_BUFFER_SIZE);
-
-    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
-    return total_recv_size;
 }
 
 TRTcpSocket::operator int() {

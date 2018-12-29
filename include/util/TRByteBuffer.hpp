@@ -13,6 +13,9 @@ public:
 
 
 public:
+    void Clear();
+    bool IsEmpty();
+    
     const unsigned char* GetData();
     int                  GetLength();
     

@@ -3,6 +3,7 @@
 
 #include "TRError.hpp"
 #include "TRTcpSocket.hpp"
+#include "TRTcpEndPoint.hpp"
 
 class TRTcpAcceptor {
 public:
@@ -18,14 +19,15 @@ public:
 
 public:
     explicit TRTcpAcceptor();
-    explicit TRTcpAcceptor(int port);
     virtual ~TRTcpAcceptor();
 
 
 public:
-    void SocketBinding(TRError* error);
-    
-    TRTcpSocket AcceptClient(TRError* error);
+    TRTcpSocket AcceptClient(TRTcpEndPoint& end_point, TRError* error);
+
+
+private:
+    void SocketBinding(TRTcpEndPoint& end_point ,TRError* error);
 
 
 private:

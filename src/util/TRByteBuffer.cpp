@@ -14,9 +14,22 @@ TRByteBuffer::TRByteBuffer(const char* data) {
     SetData(data);
 }
 
-TRByteBuffer::~TRByteBuffer() 
-{}
+TRByteBuffer::~TRByteBuffer() {
+    Clear();
+}
 
+
+void TRByteBuffer::Clear() {
+    this->buffer_.clear();
+    this->buffer_.reserve(0);
+}
+
+bool TRByteBuffer::IsEmpty() {
+    if (this->buffer_.size() != 0) {
+        return false;
+    }
+    return true;
+}
 
 const unsigned char* TRByteBuffer::GetData() {
     return &this->buffer_[0];
@@ -29,12 +42,13 @@ int TRByteBuffer::GetLength() {
 
 void TRByteBuffer::SetData(unsigned char* data, int length) {
     this->buffer_.reserve(length);
-    memcpy(&this->buffer_[0], data, length);
+    this->buffer_.insert(this->buffer_.begin(), &data[0], &data[length]);
 }
 
 void TRByteBuffer::SetData(const char* data) {
-    this->buffer_.reserve(strlen(data) + 1);
-    memcpy(&this->buffer_[0], data, strlen(data) + 1);
+    int data_length = strlen(data) + 1;
+    this->buffer_.reserve(data_length);
+    this->buffer_.insert(this->buffer_.begin(), &data[0], &data[data_length]);
 }
 
 
@@ -43,11 +57,7 @@ TRByteBuffer& TRByteBuffer::Append(TRByteBuffer& buffer) {
 }
 
 TRByteBuffer& TRByteBuffer::Append(unsigned char* data, int length) {
-    std::vector<unsigned char> temp_array;
-    temp_array.reserve(length);
-    memcpy(&temp_array[0], data, length);
-    this->buffer_.insert(this->buffer_.end(), temp_array.begin(), temp_array.end());
-    
+    this->buffer_.insert(this->buffer_.end(), &data[0], &data[length]);
     return *this;
 }
 
