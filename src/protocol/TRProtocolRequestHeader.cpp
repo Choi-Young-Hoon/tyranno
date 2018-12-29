@@ -3,11 +3,28 @@
 #include <cstring>
 
 TRProtocolRequestHeader::TRProtocolRequestHeader() {
-    Clear();
+    memset(&this->header_data_, 0x00 ,sizeof(this->header_data_));
 }
 
 TRProtocolRequestHeader::~TRProtocolRequestHeader()
 {}
+
+
+void TRProtocolRequestHeader::SetRequestType(uint request_type) {
+    this->header_data_.request_type_ = request_type;
+}
+
+void TRProtocolRequestHeader::SetSystemType(uint8_t system_type) {
+    this->header_data_.system_type_ = system_type;
+}
+
+void TRProtocolRequestHeader::SetVersion(uint16_t version) {
+    this->header_data_.version_ = version;
+}
+
+void TRProtocolRequestHeader::SetSession(uint session) {
+    this->header_data_.session_ = session;
+}
 
 
 uint TRProtocolRequestHeader::GetRequestType() {
@@ -39,11 +56,11 @@ void TRProtocolRequestHeader::marshal(TRByteBuffer* byte_buffer) {
 void TRProtocolRequestHeader::unmarshal(TRByteBuffer& byte_buffer, TRError* error) {
     int header_data_size = sizeof(this->header_data_);
     if (byte_buffer.GetLength() < header_data_size) {
-        error->SetErrorValue(TRProtocol::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Request header size not enough");
+        error->SetErrorValue(TRProtocolHeaderInterface::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Request header size not enough");
         return;
     }
 
     this->header_data_ = *(TR_PROTOCOL_REQUEST_HEADER*)byte_buffer.GetData();
     
-    error->SetErrorCode(TRProtocol::SUCCESS);
+    error->SetErrorCode(TRProtocolHeaderInterface::SUCCESS);
 }

@@ -1,7 +1,7 @@
 #ifndef __TYRANNO_PROTOCOL_REQUEST_HEADER__
 #define __TYRANNO_PROTOCOL_REQUEST_HEADER__
 
-#include "TRProtocol.hpp"
+#include "TRProtocolHeaderInterface.hpp"
 
 extern "C" {
     struct _TR_PROTOCOL_REQUEST_HEADER {
@@ -13,7 +13,7 @@ extern "C" {
     typedef struct _TR_PROTOCOL_REQUEST_HEADER TR_PROTOCOL_REQUEST_HEADER;
 };
 
-class TRProtocolRequestHeader : public TRProtocol {
+class TRProtocolRequestHeader : public TRProtocolHeaderInterface {
 public:
     explicit TRProtocolRequestHeader();
     virtual ~TRProtocolRequestHeader();
@@ -25,10 +25,10 @@ public:
 public:
     void Clear();
 
-    void SetRequestType();
-    void SetSystemType();
-    void SetVersion();
-    void SetSession();
+    void SetRequestType(uint request_type);
+    void SetSystemType(uint8_t system_type);
+    void SetVersion(uint16_t version);
+    void SetSession(uint session);
 
     uint     GetRequestType();
     uint8_t  GetSystemType();

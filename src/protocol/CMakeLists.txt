@@ -11,8 +11,15 @@ set (CMAKE_CXX_STANDARD ${CPP_VERSION})
 
 set (LIBPROTOCOL tyrannoprotocol)
 set (LIBPROTOCOLNAME lib${LIBPROTOCOL}.a)
-set (SOURCES TRProtocolRequestHeader.cpp
-             TRProtocolResponseHeader.cpp)
+set (SOURCES TRProtocol.cpp
+             TRProtocolHeaderInterface.cpp
+             TRProtocolBodyInterface.cpp
+             TRProtocolRequestHeader.cpp
+             TRProtocolResponseHeader.cpp
+             TRProtocolRegist.cpp
+             TRProtocolExit.cpp 
+             TRProtocolTranscoding.cpp 
+             TRProtocolMuxing.cpp)
 
 # compile option
 add_compile_options (-W -Wall)
