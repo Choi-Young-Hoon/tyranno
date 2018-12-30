@@ -9,8 +9,15 @@ TRCodec::TRCodec() {
     this->video_codec_ctx_ = NULL;
 }
 
-TRCodec::~TRCodec()
-{}
+TRCodec::~TRCodec() {
+    if (this->video_codec_ctx_ != NULL) {
+        avcodec_free_context(&this->video_codec_ctx_);
+    }
+
+    if (this->audio_codec_ctx_ != NULL) {
+        avcodec_free_context(&this->audio_codec_ctx_);
+    }
+}
 
 
 void TRCodec::InitializeCodec(TRCodecID& codec_id, TRError* error) {

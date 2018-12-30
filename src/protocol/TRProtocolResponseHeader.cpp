@@ -6,8 +6,11 @@ TRProtocolResponseHeader::TRProtocolResponseHeader() {
     this->header_data_.error_message = NULL;
 }
 
-TRProtocolResponseHeader::~TRProtocolResponseHeader() 
-{}
+TRProtocolResponseHeader::~TRProtocolResponseHeader() {
+    if (this->header_data_.error_message != NULL) {
+        delete[] this->header_data_.error_message;
+    }
+}
 
 
 void TRProtocolResponseHeader::marshal(TRByteBuffer* byte_buffer) {
