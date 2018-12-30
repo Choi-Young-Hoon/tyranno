@@ -1,2 +1,2 @@
 # tyranno
-Distribution Video Transcoding Server 
+Dispersion video transcoding server 
