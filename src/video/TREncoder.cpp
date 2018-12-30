@@ -20,6 +20,6 @@ void TREncoder::SetCodec(TRCodec* codec) {
 }
 
 void TREncoder::Encode(TRRawFrame& decoded_frame, TRFrame* encode_frame, TRError* error) {
-
+    
     error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }

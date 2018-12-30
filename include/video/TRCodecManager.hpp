@@ -19,8 +19,8 @@ public:
     static TRCodec* CreateCodec(CODEC_TYPE codec_type, TRVideo& video, TRError* error);
 
 private:
-    static TRCodec* CreateEncodeCodec(TRCodecID& codec_id, TRError* error);
-    static TRCodec* CreateDecodeCodec(TRCodecID& codec_id, TRError* error);
+    static TRCodec* CreateEncodeCodec(TRError* error);
+    static TRCodec* CreateDecodeCodec(TRError* error);
 
 private:
     explicit TRCodecManager();

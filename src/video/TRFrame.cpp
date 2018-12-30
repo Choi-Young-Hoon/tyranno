@@ -4,21 +4,34 @@ TRFrame::TRFrame() {
     Clear();
 }
 
-TRFrame::~TRFrame()
-{}
+TRFrame::~TRFrame() {
+    Clear();
+}
 
 
 void TRFrame::Clear() {
+    av_packet_unref(&this->packet_);
     av_init_packet(&this->packet_);
-
     this->packet_.data = NULL;
     this->packet_.size = 0;
 }
 
-void TRFrame::GetByteBuffer(TRByteBuffer* byte_buffer) {
+void TRFrame::GetData(TRByteBuffer* byte_buffer) {
     if (this->packet_.data == NULL) {
         return;
     } 
 
     byte_buffer->SetData(this->packet_.data, this->packet_.size);
+}
+
+void TRFrame::SetData(TRByteBuffer& byte_buffer) {
+    Clear();
+
+    this->packet_.data = new uint8_t[byte_buffer.GetLength()];
+    if (this->packet_.data == NULL) {
+        return;
+    }
+
+    memcpy(this->packet_.data, byte_buffer.GetData(), byte_buffer.GetLength());
+    this->packet_.size = byte_buffer.GetLength();
 }

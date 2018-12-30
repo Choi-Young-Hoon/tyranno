@@ -13,8 +13,7 @@ public:
 public:
     void SetCodec(TRCodec* codec);
     
-    void Decode(TRVideo& video, std::string& output_file_name, TRError* error);
-    void Decode(TRFrame& encoded_fram, TRRawFrame* decode_frame, TRError* error);
+    void Decode(TRFrame& encoded_frame, TRRawFrame* decode_frame, TRError* error);
 
 private:
     TRCodec* codec_;

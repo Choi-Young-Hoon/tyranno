@@ -1,10 +1,13 @@
 #include "TRCodec.hpp"
 
 
-TRCodec::TRCodec()
-: audio_codec_(NULL), audio_codec_ctx_(NULL)
-, video_codec_(NULL), video_codec_ctx_(NULL)
-{}
+TRCodec::TRCodec() {
+    this->audio_codec_ = NULL;
+    this->audio_codec_ctx_ = NULL;
+
+    this->video_codec_ = NULL;
+    this->video_codec_ctx_ = NULL;
+}
 
 TRCodec::~TRCodec()
 {}

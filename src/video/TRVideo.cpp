@@ -1,9 +1,9 @@
 #include "TRVideo.hpp"
 
 TRVideo::TRVideo() 
-: format_ctx_(NULL)
-, video_stream_index_(0), audio_stream_index_(0)
-{}
+: video_stream_index_(0), audio_stream_index_(0) {
+    this->format_ctx_ = NULL;
+}
 
 TRVideo::~TRVideo() {
     Close();

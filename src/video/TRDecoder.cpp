@@ -19,12 +19,7 @@ void TRDecoder::SetCodec(TRCodec* codec) {
     this->codec_ = codec;
 }
 
-void TRDecoder::Decode(TRVideo& video, std::string& output_file_name, TRError* error) {
-
-    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
-}
-
-void TRDecoder::Decode(TRFrame& encoded_fram, TRRawFrame* decode_frame, TRError* error) {
-
+void TRDecoder::Decode(TRFrame& encoded_frame, TRRawFrame* decode_frame, TRError* error) {
+    
     error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }

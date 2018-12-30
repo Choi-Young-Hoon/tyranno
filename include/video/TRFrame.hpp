@@ -18,7 +18,8 @@ public:
 public:
     void Clear();
 
-    void GetByteBuffer(TRByteBuffer* byte_buffer);
+    void GetData(TRByteBuffer* byte_buffer);
+    void SetData(TRByteBuffer& byte_buffer);
 
 private:
     AVPacket packet_;
