@@ -3,16 +3,18 @@
 
 #include "TRCodec.hpp"
 
-class TRDecoder : public TRCodec {
+class TRDecoder{
 public:
     explicit TRDecoder();
     virtual ~TRDecoder();
 
-protected:
-    virtual AVCodec* createCodec(TR_CODEC_ID codec_id);
+public:
+    void SetCodec(TRCodec* codec);
+    
+    void Decode(TRFrame& encoded_fram, TRRawFrame* decode_frame, TRError* error);
 
 private:
-
+    TRCodec* codec_;
 };
 
 #endif

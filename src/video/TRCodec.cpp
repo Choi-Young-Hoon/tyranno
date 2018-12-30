@@ -37,11 +37,14 @@ void TRCodec::InitializeCodec(TRVideo& video, TRError* error) {
     }
 }
 
+
 AVCodec* TRCodec::createCodec(TR_CODEC_ID codec_id) {
+    TR_UNUSED(codec_id);
+
     return NULL;
 }
 
-
+    
 void TRCodec::SetVideoCodecCtx(AVCodecContext* video_codec_ctx) {
     this->video_codec_ctx_ = video_codec_ctx;
 }

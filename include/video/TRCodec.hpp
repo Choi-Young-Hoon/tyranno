@@ -4,6 +4,9 @@
 #include "TRError.hpp"
 #include "TR_TYPE.hpp"
 #include "TRVideo.hpp"
+#include "TRRawFrame.hpp"
+
+#include <list>
 
 extern "C" {
 #include "libavcodec/avcodec.h"
@@ -30,11 +33,6 @@ public:
 public:
     void InitializeCodec(TRVideo& video, TRError* error);
 
-protected:
-    virtual AVCodec* createCodec(TR_CODEC_ID codec_id);
-    virtual void     run(TRByteBuffer& task_before, TRByteBuffer* task_result, TRError* error);
-
-protected:
     // set
     void SetVideoCodecCtx(AVCodecContext* video_codec_ctx);
     void SetAudioCodecCtx(AVCodecContext* audio_codec_ctx);
@@ -42,6 +40,10 @@ protected:
     // get
     AVCodecContext* GetVideoCodecCtx();
     AVCodecContext* GetAudioCodecCtx();
+
+protected:
+    // interface
+    virtual AVCodec* createCodec(TR_CODEC_ID codec_id);
 
 private:
     void InitializeVideoCodec(TRVideo& video, TRError* error);

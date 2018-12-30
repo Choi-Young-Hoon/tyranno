@@ -21,8 +21,7 @@ public:
 
     // set
     void SetErrorValue(int error_code, std::string& error_message) {
-        SetErrorCode(error_code);
-        SetErrorMessage(error_message);
+        SetErrorValue(error_code, error_message.c_str());
     }
 
     void SetErrorValue(int error_code, const char* error_message) {

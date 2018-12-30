@@ -16,8 +16,10 @@ set (SOURCES TRVideo.cpp
              TRRawFrame.cpp
              TRFrame.cpp 
              TRCodec.cpp 
-             TRDecoder.cpp 
-             TREncoder.cpp 
+             TRDecodeCodec.cpp 
+             TREncodeCodec.cpp 
+             TRDecoder.cpp
+             TREncoder.cpp
              )
 
 # compile option
