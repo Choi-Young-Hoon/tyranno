@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 #include "video/TRVideo.hpp"
+#include "video/TRDecoder.hpp"
 #include "video/TRCodecManager.hpp"
 
 #include <iostream>
@@ -23,6 +24,11 @@ TEST(TRVideoDecode_TEST, TRDecoderCodec_TEST) {
 TEST(TRVideoDecode_TEST, TRDecoder_TEST) {
     TRVideo video;
     ASSERT_TRUE(openVideo(&video));
+
+    TRError error;
+    TRDecoder decoder;
+    decoder.SetCodec(TRCodecManager::CreateCodec(TRCodecManager::DECODE_CODEC, video, &error));
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     video.Close();
 }

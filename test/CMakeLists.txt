@@ -25,7 +25,7 @@ set (SOURCE main.cpp
             TRByteBuffer_TEST.cpp
             TRProtocolBody_TEST.cpp
             TRProtocolHeader_TEST.cpp  
-            TRVideoDecode_TEST.cpp)
+            TRVideo_TEST.cpp)
 
 include_directories (${GTEST_INCLUDE_PATH} ${FFMPEG_INCLUDE_PATH} ${TYRANNO_INCLUDE_PATH})
 link_directories    (${GTEST_LIBRARY_PATH} ${FFMPEG_LIBRARY_PATH} ${TYRANNO_LIBRARY_PATH})

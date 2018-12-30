@@ -3,8 +3,9 @@
 
 #include "TRCodec.hpp"
 
-class TRDecoder{
+#include <string>
 
+class TRDecoder{
 public:
     explicit TRDecoder();
     virtual ~TRDecoder();
@@ -12,6 +13,7 @@ public:
 public:
     void SetCodec(TRCodec* codec);
     
+    void Decode(TRVideo& video, std::string& output_file_name, TRError* error);
     void Decode(TRFrame& encoded_fram, TRRawFrame* decode_frame, TRError* error);
 
 private:
