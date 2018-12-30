@@ -23,13 +23,13 @@ void TRProtocolRequestHeader::marshal(TRByteBuffer* byte_buffer) {
 void TRProtocolRequestHeader::unmarshal(TRByteBuffer& byte_buffer, TRError* error) {
     int header_data_size = sizeof(this->header_data_);
     if (byte_buffer.GetLength() < header_data_size) {
-        error->SetErrorValue(TRProtocol::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Request header size not enough");
+        error->SetErrorValue(ERROR_DEFINE::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Request header size not enough");
         return;
     }
 
     this->header_data_ = *(TR_PROTOCOL_REQUEST_HEADER*)byte_buffer.GetData();
     
-    error->SetErrorCode(TRProtocol::SUCCESS);
+    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }
 
 

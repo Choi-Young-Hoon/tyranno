@@ -20,7 +20,7 @@ TRTcpSocket TRTcpConnector::ConnectServer(TRTcpEndPoint& end_point, TRError* err
     TRTcpSocket return_socket;
 
     return_socket.CreateSocket(error);
-    if (error->GetErrorCode() != TRTcpSocket::SUCCESS) {
+    if (error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
         return return_socket;
     }
 

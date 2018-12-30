@@ -5,12 +5,6 @@
 
 class TREncoder {
 public:
-    enum _ERROR_DEFINE {
-        SUCCESS = 0,
-    };
-    typedef enum _ERROR_DEFINE ERROR_DEFINE;
-    
-public:
     explicit TREncoder();
     virtual ~TREncoder();
 

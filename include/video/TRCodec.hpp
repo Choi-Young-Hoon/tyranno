@@ -2,8 +2,8 @@
 #define __TYRANNO_CODEC_HEADER__
 
 #include "TRError.hpp"
-#include "TR_TYPE.hpp"
 #include "TRVideo.hpp"
+#include "TRCodecID.hpp"
 #include "TRRawFrame.hpp"
 
 #include <list>
@@ -14,23 +14,14 @@ extern "C" {
 
 class TRCodec {
 public:
-    enum _ERROR_DEFINE {
-        SUCCESS = 0,
-
-        MEMORY_ALLOC_FAILED,
-        NOT_FOUND_VIDEO_CODEC,
-        NOT_FOUND_AUDIO_CODEC,
-    };
-    typedef enum _ERROR_DEFINE ERROR_DEFINE;
-
-public: // create
-    static TRCodec* create(TRVideo& video, TRError* error);
-
-public:
     explicit TRCodec();
     virtual ~TRCodec();
 
+    friend class TRDecoder;
+    friend class TREncoder;
+    
 public:
+    void InitializeCodec(TRCodecID& codec_id, TRError* error);
     void InitializeCodec(TRVideo& video, TRError* error);
 
     // set
@@ -46,8 +37,8 @@ protected:
     virtual AVCodec* createCodec(TR_CODEC_ID codec_id);
 
 private:
-    void InitializeVideoCodec(TRVideo& video, TRError* error);
-    void InitializeAudioCodec(TRVideo& video, TRError* error);
+    void InitializeVideoCodec(TR_CODEC_ID video, TRError* error);
+    void InitializeAudioCodec(TR_CODEC_ID codec_id, TRError* error);
 
 private:
     AVCodec* video_codec_;

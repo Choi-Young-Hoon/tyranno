@@ -1,0 +1,30 @@
+#ifndef __TYRANNO_CODEC_MANAGER_HEADER__
+#define __TYRANNO_CODEC_MANAGER_HEADER__
+
+#include "TRCodec.hpp"
+#include "TRCodecID.hpp"
+#include "TRDecodeCodec.hpp"
+#include "TREncodeCodec.hpp"
+
+class TRCodecManager {
+public:
+    enum _CODEC_TYPE {
+        DECODE_CODEC = 0,
+        ENCODE_CODEC,
+    };
+    typedef enum _CODEC_TYPE CODEC_TYPE;
+
+public:
+    static TRCodec* CreateCodec(CODEC_TYPE codec_type, TRCodecID& codec_id, TRError* error);
+    static TRCodec* CreateCodec(CODEC_TYPE codec_type, TRVideo& video, TRError* error);
+
+private:
+    static TRCodec* CreateEncodeCodec(TRCodecID& codec_id, TRError* error);
+    static TRCodec* CreateDecodeCodec(TRCodecID& codec_id, TRError* error);
+
+private:
+    explicit TRCodecManager();
+    virtual ~TRCodecManager();
+};
+
+#endif

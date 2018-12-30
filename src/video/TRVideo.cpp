@@ -2,6 +2,7 @@
 
 TRVideo::TRVideo() 
 : format_ctx_(NULL)
+, video_stream_index_(0), audio_stream_index_(0)
 {}
 
 TRVideo::~TRVideo() {
@@ -80,7 +81,7 @@ TR_CODEC_ID TRVideo::GetAudioCodecID() {
 }
 
 TR_CODEC_ID TRVideo::GetCodecID(int stream_index) {
-    if (IsOpen() == false) {
+    if (IsOpen() == false || stream_index < 0) {
         return AV_CODEC_ID_NONE;
     }
 

@@ -9,20 +9,6 @@
 
 class TRTcpSocket {
 public:
-    enum _ERROR_DEFINE {
-        SUCCESS = 0,
-        SOCKET_CREATE_FAILED,
-
-        PORT_INFO_EMPTY,
-        SOCKET_BIND_FAILED,
-        SOCKET_LISTEN_FAILED,
-
-        DATA_SEND_FAILED,
-        DATA_RECV_FAILED,
-    };
-    typedef enum _ERROR_DEFINE ERROR_DEFINE;
-
-public:
     explicit TRTcpSocket();
     explicit TRTcpSocket(int socket);
     virtual ~TRTcpSocket();

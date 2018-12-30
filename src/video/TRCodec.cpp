@@ -1,20 +1,5 @@
 #include "TRCodec.hpp"
 
-TRCodec* TRCodec::create(TRVideo& video, TRError* error) {
-    TRCodec* ret_codec = new TRCodec();
-    if (ret_codec == NULL) {
-        error->SetErrorValue(TRCodec::MEMORY_ALLOC_FAILED, "codec memory alloc is NULL");
-        return NULL;
-    }
-
-    ret_codec->InitializeCodec(video, error);
-    if (error->GetErrorCode() != TRCodec::SUCCESS) {
-        delete ret_codec;
-        return NULL;
-    }
-
-    return ret_codec;
-}
 
 TRCodec::TRCodec()
 : audio_codec_(NULL), audio_codec_ctx_(NULL)
@@ -25,16 +10,22 @@ TRCodec::~TRCodec()
 {}
 
 
-void TRCodec::InitializeCodec(TRVideo& video, TRError* error) {
-    InitializeVideoCodec(video, error);
-    if(error->GetErrorCode() != TRCodec::SUCCESS) {
+void TRCodec::InitializeCodec(TRCodecID& codec_id, TRError* error) {
+    InitializeVideoCodec(codec_id.GetVideoCodecID(), error);
+    if(error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
         return;
     }
 
-    InitializeAudioCodec(video, error);
-    if (error->GetErrorCode() != TRCodec::SUCCESS) {
+    InitializeAudioCodec(codec_id.GetAudioCodecID(), error);
+    if (error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
         return;
     }
+}
+
+void TRCodec::InitializeCodec(TRVideo& video, TRError* error) {
+    TRCodecID codec_id(video.GetVideoCodecID(), video.GetAudioCodecID());
+
+    InitializeCodec(codec_id, error);
 }
 
 
@@ -62,20 +53,24 @@ AVCodecContext* TRCodec::GetAudioCodecCtx() {
 }
 
 
-void TRCodec::InitializeVideoCodec(TRVideo& video, TRError* error) {
-   this->video_codec_ = createCodec(video.GetVideoCodecID());
-    if (this->video_codec_ == NULL) {
-        error->SetErrorValue(TRCodec::NOT_FOUND_VIDEO_CODEC, "Not found video codec");
-        return;
+void TRCodec::InitializeVideoCodec(TR_CODEC_ID codec_id, TRError* error) {
+    this->video_codec_ = createCodec(codec_id);
+    if (this->video_codec_ != NULL) {
+        this->video_codec_ctx_ = avcodec_alloc_context3(this->video_codec_);
+    } else {
+        this->video_codec_ctx_ = NULL;
     }
-    this->video_codec_ctx_ = avcodec_alloc_context3(this->video_codec_);
+
+    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }
 
-void TRCodec::InitializeAudioCodec(TRVideo& video, TRError* error) {
-    this->audio_codec_ = createCodec(video.GetAudioCodecID());
+void TRCodec::InitializeAudioCodec(TR_CODEC_ID codec_id, TRError* error) {
+    this->audio_codec_ = createCodec(codec_id);
     if (this->audio_codec_ == NULL) {
-        error->SetErrorValue(TRCodec::NOT_FOUND_AUDIO_CODEC, "Not found audio codec");
-        return;
+        this->audio_codec_ctx_ = avcodec_alloc_context3(this->audio_codec_);
+    } else {
+        this->audio_codec_ctx_ = NULL;
     }
-    this->audio_codec_ctx_ = avcodec_alloc_context3(this->audio_codec_);
+
+    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }

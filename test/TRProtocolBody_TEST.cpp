@@ -19,7 +19,7 @@ TEST(TRProtocolExitReuqest_TEST, marshal_unmarshal) {
     TRError error;
     TRProtocolExitRequest exit_request_unmarshal;
     exit_request_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolExitRequest::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 }
 
 TEST(TRProtocolExitResponse_TEST, marshal_unmarshal) {
@@ -31,7 +31,7 @@ TEST(TRProtocolExitResponse_TEST, marshal_unmarshal) {
     TRError error;
     TRProtocolExitResponse exit_response_unmarshal;
     exit_response_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolExitResponse::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 }
 
 TEST(TRProtocolRegistRequest_TEST, marshal_unmarshal) {
@@ -46,7 +46,7 @@ TEST(TRProtocolRegistRequest_TEST, marshal_unmarshal) {
     TRError error;
     TRProtocolRegistRequest regist_request_unmarshal;
     regist_request_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolRegistRequest::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_EQ(regist_request_unmarshal.GetSystemVersion(), system_version);
 }
@@ -63,7 +63,7 @@ TEST(TRProtocolRegistRequest_TEST, marshal_unmarshal_FAILED) {
     TRError error;
     TRProtocolRegistRequest regist_request_unmarshal;
     regist_request_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolRegistRequest::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_TRUE(regist_request_unmarshal.GetSystemVersion() != (system_version - 100));
 }
@@ -80,7 +80,7 @@ TEST(TRProtocolRegistResponse_TEST, marshal_unmarshal) {
     TRError error;
     TRProtocolRegistResponse regist_response_unmarshal;
     regist_response_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolRegistResponse::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_EQ(regist_response_unmarshal.GetSession(), session);
 }
@@ -97,7 +97,7 @@ TEST(TRProtocolRegistResponse_TEST, marshal_unmarshal_FAILED) {
     TRError error;
     TRProtocolRegistResponse regist_response_unmarshal;
     regist_response_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolRegistResponse::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_TRUE(regist_response_unmarshal.GetSession() != (session - 100));
 }

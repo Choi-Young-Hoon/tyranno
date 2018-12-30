@@ -4,11 +4,6 @@
 #include "TRCodec.hpp"
 
 class TRDecoder{
-public:
-    enum _ERROR_DEFINE {
-        SUCCESS = 0,
-    };
-    typedef enum _ERROR_DEFINE ERROR_DEFINE;
 
 public:
     explicit TRDecoder();

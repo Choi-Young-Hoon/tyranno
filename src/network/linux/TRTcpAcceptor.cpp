@@ -57,7 +57,7 @@ void TRTcpAcceptor::SocketBinding(TRTcpEndPoint& end_point, TRError* error) {
    
    socket_.CloseSocket();
    socket_.CreateSocket(error);
-   if (error->GetErrorCode() != TRTcpSocket::SUCCESS) {
+   if (error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
        return ;
    }
 

@@ -20,7 +20,7 @@ TEST(TRProtocolRequestHeader_TEST, marshal_unmarshal_TEST) {
     TRError error;
     TRProtocolRequestHeader request_header_unmarshal;
     request_header_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolRequestHeader::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_EQ(request_header_unmarshal.GetRequestType(), request_type);
     ASSERT_EQ(request_header_unmarshal.GetSystemType(), system_type);
@@ -43,7 +43,7 @@ TEST(TRProtocolResponseHeader_TEST, mrashal_unmarshal_TEST) {
     TRError error;
     TRProtocolResponseHeader response_header_unmarshal;
     response_header_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolResponseHeader::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_EQ(response_header_unmarshal.GetRequestType(), request_type);
     ASSERT_EQ(response_header_unmarshal.GetResultCode(), result_code);
@@ -67,7 +67,7 @@ TEST(TRProtocolRequestHeader_TEST, marshal_unmarshal_FAILED_TEST) {
     TRError error;
     TRProtocolRequestHeader request_header_unmarshal;
     request_header_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolRequestHeader::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_TRUE(request_header_unmarshal.GetRequestType() != request_type - 1);
     ASSERT_TRUE(request_header_unmarshal.GetSystemType() != system_type - 1);
@@ -90,7 +90,7 @@ TEST(TRProtocolResponseHeader_TEST, mrashal_unmarshal_FAILED_TEST) {
     TRError error;
     TRProtocolResponseHeader response_header_unmarshal;
     response_header_unmarshal.unmarshal(byte_buffer, &error);
-    ASSERT_EQ(error.GetErrorCode(), TRProtocolResponseHeader::SUCCESS);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
     ASSERT_TRUE(response_header_unmarshal.GetRequestType() != (request_type - 10));
     ASSERT_TRUE(response_header_unmarshal.GetResultCode() != (result_code + 100));

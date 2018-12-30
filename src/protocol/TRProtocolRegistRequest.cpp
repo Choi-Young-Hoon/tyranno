@@ -16,12 +16,12 @@ void TRProtocolRegistRequest::marshal(TRByteBuffer* byte_buffer) {
 void TRProtocolRegistRequest::unmarshal(TRByteBuffer& byte_buffer, TRError* error) {
     int minimum_size = sizeof(this->body_data_);
     if (byte_buffer.GetLength() < minimum_size) {
-        error->SetErrorValue(TRProtocol::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Protocol Regist body size not enough");
+        error->SetErrorValue(ERROR_DEFINE::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Protocol Regist body size not enough");
         return;
     }
 
     this->body_data_ = *(TR_PROTOCOL_REGIST_REQUEST*)byte_buffer.GetData();
-    error->SetErrorCode(TRProtocol::SUCCESS);
+    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }
 
 void TRProtocolRegistRequest::Clear() {

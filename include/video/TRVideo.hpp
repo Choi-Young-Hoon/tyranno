@@ -1,7 +1,7 @@
 #ifndef __TYRANNO_VIDEO_HEADER__
 #define __TYRANNO_VIDEO_HEADER__
 
-#include "TR_TYPE.hpp"
+#include "TR_VIDEO_TYPE.hpp"
 #include "TRError.hpp"
 #include "TRFrame.hpp"
 
@@ -12,18 +12,6 @@ extern "C" {
 };
 
 class TRVideo {
-public:
-    enum _ERROR_DEFINE {
-        SUCCESS = 0,
-
-        FILE_OPEN_FAILED,
-        FILE_NOT_OPENED,
-        STREAM_INFO_NOT_FOUND,
-
-        READ_FRAME_FAILED,
-    };
-    typedef enum _ERROR_DEFINE ERROR_DEFINE;
-
 public:
     explicit TRVideo();
     virtual ~TRVideo();

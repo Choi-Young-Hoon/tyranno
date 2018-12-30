@@ -24,7 +24,7 @@ void TRProtocolResponseHeader::unmarshal(TRByteBuffer& byte_buffer, TRError* err
 
     int minimum_header_size = sizeof(this->header_data_.data);
     if (byte_buffer.GetLength() < minimum_header_size) {
-        error->SetErrorValue(TRProtocol::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Response header size not enough");
+        error->SetErrorValue(ERROR_DEFINE::UNMARSHAL_DATA_SIZE_NOT_ENOUGH, "TR Response header size not enough");
         return;
     }
 
@@ -32,7 +32,7 @@ void TRProtocolResponseHeader::unmarshal(TRByteBuffer& byte_buffer, TRError* err
     if (this->header_data_.data.error_message_length > 0) {
         this->header_data_.error_message = new char[this->header_data_.data.error_message_length + 1];
         if (this->header_data_.error_message == NULL) {
-            error->SetErrorValue(TRProtocol::MEMORY_ALLOC_FAILED, "TR Response header error message memory allocate is NULL");
+            error->SetErrorValue(ERROR_DEFINE::MEMORY_ALLOC_FAILED, "TR Response header error message memory allocate is NULL");
             return;
         }
         memset(this->header_data_.error_message, '\0', this->header_data_.data.error_message_length + 1);
@@ -41,7 +41,7 @@ void TRProtocolResponseHeader::unmarshal(TRByteBuffer& byte_buffer, TRError* err
         memcpy(this->header_data_.error_message, error_message_byte_buffer.GetData(), error_message_byte_buffer.GetLength());
     }
 
-    error->SetErrorCode(TRProtocol::SUCCESS);
+    error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }
 
 void TRProtocolResponseHeader::Clear() {

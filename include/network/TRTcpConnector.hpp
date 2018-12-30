@@ -6,14 +6,6 @@
 
 class TRTcpConnector {
 public:
-    enum _ERROR_DEFINE {
-        SUCCESS = 0,
-
-        SERVER_CONNECT_FAILED,
-    };
-    typedef enum _ERROR_DEFINE ERROR_DEFINE;
-
-public:
     explicit TRTcpConnector();
     virtual ~TRTcpConnector();
 
