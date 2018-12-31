@@ -1,17 +1,15 @@
 #include "TRFrame.hpp"
 
 TRFrame::TRFrame() {
-    Clear();
+    av_init_packet(&this->packet_);
 }
 
 TRFrame::~TRFrame() {
-    Clear();
 }
 
 
 void TRFrame::Clear() {
     av_packet_unref(&this->packet_);
-    av_init_packet(&this->packet_);
     this->packet_.data = NULL;
     this->packet_.size = 0;
 }

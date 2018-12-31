@@ -4,6 +4,9 @@
 #include "TR_VIDEO_TYPE.hpp"
 #include "TRError.hpp"
 #include "TRFrame.hpp"
+#include "TRCodecID.hpp"
+#include "TRCodecParameters.hpp"
+#include "TRStreamIndex.hpp"
 
 #include <string>
 
@@ -26,19 +29,20 @@ public:
     bool ReadFrame(TRFrame* frame, TRError* error);
 
     // get
-    uint        GetStreamsCount();
-    TR_CODEC_ID GetVideoCodecID();
-    TR_CODEC_ID GetAudioCodecID();
+    uint          GetStreamsCount();
+    TRStreamIndex GetStreamIndex();
+    TRCodecID         GetCodecID();
+    TRCodecParameters GetCodecParameters();
 
 private:
     // get
-    TR_CODEC_ID GetCodecID(int stream_index);
+    TR_CODEC_ID        GetCodecID(int stream_index);
+    AVCodecParameters* GetAVCodecParameters(int stream_index);
 
 private:
     AVFormatContext* format_ctx_;
 
-    int video_stream_index_;
-    int audio_stream_index_;
+    TRStreamIndex stream_index_;
 };
 
 #endif

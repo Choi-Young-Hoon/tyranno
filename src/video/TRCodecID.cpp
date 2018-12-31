@@ -14,6 +14,7 @@ TRCodecID::TRCodecID(TR_CODEC_ID video_codec_id, TR_CODEC_ID audio_codec_id)
 TRCodecID::~TRCodecID()
 {}
 
+
 void TRCodecID::SetVideoCodecID(TR_CODEC_ID video_codec_id) {
     this->video_codec_id_ = video_codec_id;
 }

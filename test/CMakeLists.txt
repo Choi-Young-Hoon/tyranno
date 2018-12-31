@@ -47,7 +47,7 @@ set (FFMPEG_LIB_LIST ${FFMPEG_FORMAT_LIB}
                      ${FFMPEG_POST_PROC_LIB}
                      ${FFMPEG_SWRESAMPLE_LIB})
 set (TYRANNO_LIB_LIST tyrannoutil tyrannoprotocol tyrannovideo)
-set (OTHER_LIB_LIST -pthread -lz)
+set (OTHER_LIB_LIST -pthread -lz -lx264 -lx265 -lmp3lame -lvpx -lfdk-aac)
 
 add_executable (${OUTPUT} ${SOURCE})
 target_link_libraries (${OUTPUT} ${GTESTLIB} ${TYRANNO_LIB_LIST} ${FFMPEG_LIB_LIST} ${OTHER_LIB_LIST})

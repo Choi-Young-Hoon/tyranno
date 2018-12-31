@@ -64,8 +64,8 @@ TEST(TRByteBuffer_TEST, Const_char) {
     TRByteBuffer byteBuffer(temp_data);
     ASSERT_EQ(byteBuffer.GetLength(), temp_data_length + 1);
 
-    char* return_data = (char*)byteBuffer.GetData();
-    ASSERT_TRUE(strcmp(return_data, temp_data) == 0);
+    char* ret_data = (char*)byteBuffer.GetData();
+    ASSERT_TRUE(strcmp(ret_data, temp_data) == 0);
 }
 
 TEST(TRByteBuffer_TEST, Sub) {

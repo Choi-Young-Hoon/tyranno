@@ -14,7 +14,9 @@ public:
     virtual ~TRFrame();
 
     friend class TRVideo;
-
+    friend class TRDecoder;
+    friend class TREncoder;
+    
 public:
     void Clear();
 

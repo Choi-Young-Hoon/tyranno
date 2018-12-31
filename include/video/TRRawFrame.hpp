@@ -13,11 +13,14 @@ public:
     explicit TRRawFrame();
     virtual ~TRRawFrame();
 
+    friend class TRDecoder;
+    friend class TREncoder;
+    
 public:
     void Clear();
  
 private:
-    AVFrame frame_;
+    AVFrame* frame_;
 };
 
 #endif

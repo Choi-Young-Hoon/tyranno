@@ -3,6 +3,7 @@
 
 #include "TRCodec.hpp"
 #include "TRCodecID.hpp"
+#include "TRCodecParameters.hpp"
 #include "TRDecodeCodec.hpp"
 #include "TREncodeCodec.hpp"
 
@@ -15,7 +16,7 @@ public:
     typedef enum _CODEC_TYPE CODEC_TYPE;
 
 public:
-    static TRCodec* CreateCodec(CODEC_TYPE codec_type, TRCodecID& codec_id, TRError* error);
+    static TRCodec* CreateCodec(CODEC_TYPE codec_type, TRCodecID& codec_id, TRCodecParameters& codec_parameters , TRError* error);
     static TRCodec* CreateCodec(CODEC_TYPE codec_type, TRVideo& video, TRError* error);
 
 private:

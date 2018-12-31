@@ -1,7 +1,6 @@
 #include "TRVideo.hpp"
 
-TRVideo::TRVideo() 
-: video_stream_index_(0), audio_stream_index_(0) {
+TRVideo::TRVideo() {
     this->format_ctx_ = NULL;
 }
 
@@ -26,8 +25,10 @@ void TRVideo::Open(const char* file_name, TRError* error) {
         error->SetErrorValue(ERROR_DEFINE::STREAM_INFO_NOT_FOUND, "Not found stream info");
         return;
     }
-    this->video_stream_index_ = av_find_best_stream(this->format_ctx_, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
-    this->audio_stream_index_ = av_find_best_stream(this->format_ctx_, AVMEDIA_TYPE_AUDIO, -1, this->video_stream_index_, NULL, 0);
+    int video_stream_index = av_find_best_stream(this->format_ctx_, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
+    int audio_stream_index = av_find_best_stream(this->format_ctx_, AVMEDIA_TYPE_AUDIO, -1, video_stream_index, NULL, 0);
+    this->stream_index_.SetVideoStreamIndex(video_stream_index);
+    this->stream_index_.SetAudioStreamIndex(audio_stream_index);
 
     error->SetErrorCode(ERROR_DEFINE::SUCCESS);
 }
@@ -54,8 +55,11 @@ bool TRVideo::ReadFrame(TRFrame* frame, TRError* error) {
     }
     frame->Clear();
 
-    int read_frame_ret = av_read_frame(this->format_ctx_, &frame->packet_);
-    if (read_frame_ret <= 0) {
+    int ret = av_read_frame(this->format_ctx_, &frame->packet_);
+    if (ret == AVERROR_EOF) {
+        error->SetErrorCode(ERROR_DEFINE::READ_FRAME_EOF);
+        return true;
+    } else if (ret < 0) {
         error->SetErrorValue(ERROR_DEFINE::READ_FRAME_FAILED, "Read failed");
         return false;
     }
@@ -72,12 +76,34 @@ uint TRVideo::GetStreamsCount() {
     return this->format_ctx_->nb_streams;
 }
 
-TR_CODEC_ID TRVideo::GetVideoCodecID() {
-    return GetCodecID(this->video_stream_index_);
+TRCodecID TRVideo::GetCodecID() {
+    TR_CODEC_ID video_codec_id = GetCodecID(this->stream_index_.GetVideoStreamIndex());
+    TR_CODEC_ID audio_codec_id = GetCodecID(this->stream_index_.GetAudioStreamIndex());
+
+    return TRCodecID(video_codec_id, audio_codec_id);
 }
 
-TR_CODEC_ID TRVideo::GetAudioCodecID() {
-    return GetCodecID(this->audio_stream_index_);
+TRStreamIndex TRVideo::GetStreamIndex() {
+    return this->stream_index_;
+}
+
+TRCodecParameters TRVideo::GetCodecParameters() {
+    TRCodecParameters ret_codec_parameters;
+    if (IsOpen() == false) {
+        return ret_codec_parameters;
+    }
+
+    AVCodecParameters* video_codec_parameters = GetAVCodecParameters(this->stream_index_.GetVideoStreamIndex());
+    if (video_codec_parameters != NULL) {
+        ret_codec_parameters.SetVideoAVCodecParameters(*video_codec_parameters);
+    }
+
+    AVCodecParameters* audio_codec_parameters = GetAVCodecParameters(this->stream_index_.GetAudioStreamIndex());
+    if (audio_codec_parameters != NULL) {
+        ret_codec_parameters.SetAudioAVCodecParameters(*audio_codec_parameters);
+    }
+
+    return ret_codec_parameters;
 }
 
 TR_CODEC_ID TRVideo::GetCodecID(int stream_index) {
@@ -86,4 +112,12 @@ TR_CODEC_ID TRVideo::GetCodecID(int stream_index) {
     }
 
     return this->format_ctx_->streams[stream_index]->codecpar->codec_id;
+}
+
+AVCodecParameters* TRVideo::GetAVCodecParameters(int stream_index) {
+    if (IsOpen() == false || stream_index < 0) {
+        return NULL;
+    }
+
+    return this->format_ctx_->streams[stream_index]->codecpar;
 }

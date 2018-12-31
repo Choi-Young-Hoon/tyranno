@@ -4,6 +4,7 @@
 #include "TRError.hpp"
 #include "TRVideo.hpp"
 #include "TRCodecID.hpp"
+#include "TRCodecParameters.hpp"
 #include "TRRawFrame.hpp"
 
 #include <list>
@@ -21,9 +22,16 @@ public:
     friend class TREncoder;
     
 public:
-    void InitializeCodec(TRCodecID& codec_id, TRError* error);
+    void InitializeCodec(TRCodecID& codec_id, TRCodecParameters& codec_parameter, TRError* error);
     void InitializeCodec(TRVideo& video, TRError* error);
 
+    void SetVideoCodecParameter(const AVCodecParameters& codec_parameters);
+
+protected:
+    // interface
+    virtual AVCodec* createCodec(TR_CODEC_ID codec_id);
+
+protected:
     // set
     void SetVideoCodecCtx(AVCodecContext* video_codec_ctx);
     void SetAudioCodecCtx(AVCodecContext* audio_codec_ctx);
@@ -32,13 +40,10 @@ public:
     AVCodecContext* GetVideoCodecCtx();
     AVCodecContext* GetAudioCodecCtx();
 
-protected:
-    // interface
-    virtual AVCodec* createCodec(TR_CODEC_ID codec_id);
-
 private:
-    void InitializeVideoCodec(TR_CODEC_ID video, TRError* error);
-    void InitializeAudioCodec(TR_CODEC_ID codec_id, TRError* error);
+    void InitializeVideoCodec(TR_CODEC_ID codec_id, TRCodecParameters& codec_parameters, TRError* error);
+    void InitializeAudioCodec(TR_CODEC_ID codec_id, TRCodecParameters& codec_parameters, TRError* error);
+    void InitializeCodec(TR_CODEC_ID codec_id, const AVCodecParameters* codec_parameters, AVCodec** codec, AVCodecContext** codec_context, TRError* error);
 
 private:
     AVCodec* video_codec_;

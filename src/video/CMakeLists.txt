@@ -19,6 +19,8 @@ set (SOURCES TRVideo.cpp
              TRFrame.cpp 
              TRCodec.cpp 
              TRCodecID.cpp
+             TRCodecParameters.cpp
+             TRStreamIndex.cpp
              TRCodecManager.cpp
              TRDecodeCodec.cpp 
              TREncodeCodec.cpp 

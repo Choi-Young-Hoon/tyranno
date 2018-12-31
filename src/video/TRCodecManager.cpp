@@ -7,7 +7,7 @@ TRCodecManager::~TRCodecManager()
 {}
 
 
-TRCodec* TRCodecManager::CreateCodec(CODEC_TYPE codec_type, TRCodecID& codec_id, TRError* error) {
+TRCodec* TRCodecManager::CreateCodec(CODEC_TYPE codec_type, TRCodecID& codec_id, TRCodecParameters& codec_parameters, TRError* error) {
     TRCodec* ret_codec = NULL;
 
     switch (codec_type) {
@@ -21,8 +21,15 @@ TRCodec* TRCodecManager::CreateCodec(CODEC_TYPE codec_type, TRCodecID& codec_id,
         error->SetErrorValue(ERROR_DEFINE::UNKNOWN_CODEC_TYPE, "Unknown codec type");
         return NULL;
     }
+    
+    if (error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
+        if (error->GetErrorCode() == ERROR_DEFINE::MEMORY_ALLOC_FAILED) {
+            delete ret_codec;
+        }
+        return NULL;
+    }
 
-    ret_codec->InitializeCodec(codec_id, error);
+    ret_codec->InitializeCodec(codec_id, codec_parameters, error);
     if (error->GetErrorCode() != ERROR_DEFINE::SUCCESS) {
         delete ret_codec;
         return NULL;
@@ -32,9 +39,10 @@ TRCodec* TRCodecManager::CreateCodec(CODEC_TYPE codec_type, TRCodecID& codec_id,
 }
 
 TRCodec* TRCodecManager::CreateCodec(CODEC_TYPE codec_type, TRVideo& video, TRError* error) {
-    TRCodecID codec_id(video.GetVideoCodecID(), video.GetAudioCodecID());
-
-    return CreateCodec(codec_type, codec_id, error);
+    TRCodecID codec_id = video.GetCodecID();
+    TRCodecParameters codec_parameter = video.GetCodecParameters();
+    
+    return CreateCodec(codec_type, codec_id, codec_parameter, error);
 }
 
 
