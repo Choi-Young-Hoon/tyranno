@@ -77,9 +77,8 @@ void TRCodecParameters::SetAVCodecParameters(AVCodecParameters** codec_parameter
 }
 
 bool TRCodecParameters::IsCodecParametersNULL(AVCodecParameters* codec_parameter) {
-    if (codec_parameter == NULL) {
+    if (codec_parameter != NULL) {
         return false;
     }
-
-    return NULL;
+    return true;
 }
