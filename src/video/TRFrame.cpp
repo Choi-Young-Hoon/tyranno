@@ -38,11 +38,3 @@ void TRFrame::GetData(TRByteBuffer* byte_buffer) {
 
     byte_buffer->SetData(this->packet_.data, this->packet_.size);
 }
-
-int TRFrame::GetWidth() {
-    return this->width_;
-}
-
-int TRFrame::GetHeight() {
-    return this->height_;
-}

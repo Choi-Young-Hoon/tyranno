@@ -25,14 +25,9 @@ public:
     
     // get
     void GetData(TRByteBuffer* byte_buffer);
-    int GetWidth();
-    int GetHeight();
 
 private:
     AVPacket packet_;
-
-    int width_;
-    int height_;
 };
 
 #endif
