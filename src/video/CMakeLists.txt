@@ -14,7 +14,7 @@ set (CMAKE_CXX_STANDARD ${CPP_VERSION})
 
 set (LIBVIDEO tyrannovideo)
 set (LIBVIDEONAME lib${LIBVIDEO}.a)
-set (SOURCES TRVideo.cpp
+set (SOURCES TRVideoReader.cpp
              TRRawFrame.cpp
              TRFrame.cpp 
              TRCodec.cpp 

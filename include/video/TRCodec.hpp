@@ -2,7 +2,7 @@
 #define __TYRANNO_CODEC_HEADER__
 
 #include "TRError.hpp"
-#include "TRVideo.hpp"
+#include "TRVideoReader.hpp"
 #include "TRCodecID.hpp"
 #include "TRCodecParameters.hpp"
 #include "TRRawFrame.hpp"
@@ -23,7 +23,7 @@ public:
     
 public:
     void InitializeCodec(TRCodecID& codec_id, TRCodecParameters& codec_parameter, TRError* error);
-    void InitializeCodec(TRVideo& video, TRError* error);
+    void InitializeCodec(TRVideoReader& video, TRError* error);
 
     void SetVideoCodecParameter(const AVCodecParameters& codec_parameters);
 

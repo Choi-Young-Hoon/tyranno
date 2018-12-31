@@ -32,7 +32,7 @@ void TRCodec::InitializeCodec(TRCodecID& codec_id, TRCodecParameters& codec_para
     }
 }
 
-void TRCodec::InitializeCodec(TRVideo& video, TRError* error) {
+void TRCodec::InitializeCodec(TRVideoReader& video, TRError* error) {
     TRCodecID codec_id = video.GetCodecID();
     TRCodecParameters codec_parameters = video.GetCodecParameters();
 

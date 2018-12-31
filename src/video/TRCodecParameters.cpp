@@ -12,6 +12,7 @@ TRCodecParameters::TRCodecParameters(AVCodecParameters& video_codec_parameters, 
 }
 
 TRCodecParameters::~TRCodecParameters() {
+    Clear();
 }
 
 
@@ -72,9 +73,7 @@ void TRCodecParameters::SetAVCodecParameters(AVCodecParameters** codec_parameter
     }
     memset(*codec_parameters, 0x00, sizeof(**codec_parameters));
 
-    memcpy(*codec_parameters, &copy_target_parameters, sizeof(copy_target_parameters));
- //   (*codec_parameters)->extradata      = NULL;
- //   (*codec_parameters)->extradata_size = 0;
+    avcodec_parameters_copy(*codec_parameters, &copy_target_parameters);
 }
 
 bool TRCodecParameters::IsCodecParametersNULL(AVCodecParameters* codec_parameter) {

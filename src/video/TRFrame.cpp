@@ -5,22 +5,18 @@ TRFrame::TRFrame() {
 }
 
 TRFrame::~TRFrame() {
+    if (this->packet_.data != NULL) {
+        delete[] this->packet_.data;
+    }
 }
 
 
 void TRFrame::Clear() {
-    av_packet_unref(&this->packet_);
     this->packet_.data = NULL;
     this->packet_.size = 0;
+    av_packet_unref(&this->packet_);
 }
 
-void TRFrame::GetData(TRByteBuffer* byte_buffer) {
-    if (this->packet_.data == NULL) {
-        return;
-    } 
-
-    byte_buffer->SetData(this->packet_.data, this->packet_.size);
-}
 
 void TRFrame::SetData(TRByteBuffer& byte_buffer) {
     Clear();
@@ -32,4 +28,21 @@ void TRFrame::SetData(TRByteBuffer& byte_buffer) {
 
     memcpy(this->packet_.data, byte_buffer.GetData(), byte_buffer.GetLength());
     this->packet_.size = byte_buffer.GetLength();
+}
+
+
+void TRFrame::GetData(TRByteBuffer* byte_buffer) {
+    if (this->packet_.data == NULL) {
+        return;
+    } 
+
+    byte_buffer->SetData(this->packet_.data, this->packet_.size);
+}
+
+int TRFrame::GetWidth() {
+    return this->width_;
+}
+
+int TRFrame::GetHeight() {
+    return this->height_;
 }

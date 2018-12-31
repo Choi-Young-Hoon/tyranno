@@ -13,18 +13,26 @@ public:
     explicit TRFrame();
     virtual ~TRFrame();
 
-    friend class TRVideo;
+    friend class TRVideoReader;
     friend class TRDecoder;
     friend class TREncoder;
     
 public:
     void Clear();
 
-    void GetData(TRByteBuffer* byte_buffer);
+    // set
     void SetData(TRByteBuffer& byte_buffer);
+    
+    // get
+    void GetData(TRByteBuffer* byte_buffer);
+    int GetWidth();
+    int GetHeight();
 
 private:
     AVPacket packet_;
+
+    int width_;
+    int height_;
 };
 
 #endif

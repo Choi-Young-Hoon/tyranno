@@ -1,18 +1,18 @@
 #include "gtest/gtest.h"
 
-#include "video/TRVideo.hpp"
+#include "video/TRVideoReader.hpp"
 #include "video/TRDecoder.hpp"
 #include "video/TRCodecManager.hpp"
 
 #include <iostream>
 #include "TEST_DEFINE.hpp"
 
-static bool openVideo(TRVideo* video);
+static bool openVideo(TRVideoReader* video);
 
 
-TEST(TRVideo_TEST, TRVideo_Open) {
+TEST(TRVideoReader_TEST, TRVideoReader_Open) {
     TRError error;
-    TRVideo video;
+    TRVideoReader video;
     video.Open(TEST_VIDEO_FILE, &error);
     ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 
@@ -22,8 +22,8 @@ TEST(TRVideo_TEST, TRVideo_Open) {
     std::cout << "Video stream count: " << video.GetStreamsCount() << std::endl;
 }
 
-TEST(TRVideo_TEST, TRVideo_ReadFrame) {
-    TRVideo video;
+TEST(TRVideoReader_TEST, TRVideoReader_ReadFrame) {
+    TRVideoReader video;
     ASSERT_TRUE(openVideo(&video));
 
     TRError error; 
@@ -32,8 +32,8 @@ TEST(TRVideo_TEST, TRVideo_ReadFrame) {
     ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 }
 
-TEST(TRVideo_TEST, TRDecoderCodec_TEST) {
-    TRVideo video;
+TEST(TRVideoReader_TEST, TRDecoderCodec_TEST) {
+    TRVideoReader video;
     ASSERT_TRUE(openVideo(&video));
 
     TRError error;
@@ -44,8 +44,8 @@ TEST(TRVideo_TEST, TRDecoderCodec_TEST) {
     delete decode_codec;
 }
 
-TEST(TRVideo_TEST, TRDecoder_CreateCodecToVideo_TEST) {
-    TRVideo video;
+TEST(TRVideoReader_TEST, TRDecoder_CreateCodecToVideo_TEST) {
+    TRVideoReader video;
     ASSERT_TRUE(openVideo(&video));
 
     TRError error;
@@ -62,8 +62,8 @@ TEST(TRVideo_TEST, TRDecoder_CreateCodecToVideo_TEST) {
     ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 }
 
-TEST(TRVideo_TEST, TRDecoder_CreateCodecToCodecID_TEST) {
-    TRVideo video;
+TEST(TRVideoReader_TEST, TRDecoder_CreateCodecToCodecID_TEST) {
+    TRVideoReader video;
     ASSERT_TRUE(openVideo(&video));
 
     TRCodecID codec_id = video.GetCodecID();
@@ -83,8 +83,34 @@ TEST(TRVideo_TEST, TRDecoder_CreateCodecToCodecID_TEST) {
     ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
 }
 
+TEST(TRVideoReader_TEST, TRDecoder_CreateCodecToCodecID_ByteBufferGetSet_TEST) {
+    TRVideoReader video;
+    ASSERT_TRUE(openVideo(&video));
 
-static bool openVideo(TRVideo* video) {
+    TRCodecID codec_id = video.GetCodecID();
+    TRCodecParameters codec_parameters = video.GetCodecParameters();
+
+    TRError error;
+    TRDecoder decoder;
+    decoder.SetCodec(TRCodecManager::CreateCodec(TRCodecManager::DECODE_CODEC, codec_id, codec_parameters, &error));
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
+
+    TRFrame frame;
+    video.ReadFrame(&frame, &error);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
+
+    TRByteBuffer byte_buffer;
+    frame.GetData(&byte_buffer);
+
+    TRFrame byte_buffer_set_frame;
+    byte_buffer_set_frame.SetData(byte_buffer);
+
+    TRRawFrame raw_frame;
+    decoder.Decode(byte_buffer_set_frame, &raw_frame, &error);
+    ASSERT_EQ(error.GetErrorCode(), ERROR_DEFINE::SUCCESS);
+}
+
+static bool openVideo(TRVideoReader* video) {
     TRError error;
 
     video->Open(TEST_VIDEO_FILE, &error);
